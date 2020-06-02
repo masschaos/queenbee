@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "8f7661ac-a130-4ea2-9b48-8f9972bbbdf1",
+		"name": "bee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "模板",
+			"item": [
+				{
+					"name": "新建模板",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"test_id_0\",\n\t\"name\": \"test_name_0\",\n\t\"org_id\": \"test_org_id_0\",\n\t\"is_simple\": true,\n\t\"request\": {\n\t\t\"url\": \"test_url\",\n\t\t\"url_variable_count\": 1,\n\t\t\"method\": \"POST\",\n\t\t\"headers\": {\n\t\t\t\"headers_1\": [\n\t\t\t\t\"1\",\n\t\t\t\t\"2\",\n\t\t\t\t\"3\"\n\t\t\t],\n\t\t\t\"headers_2\": [\n\t\t\t\t\"1\",\n\t\t\t\t\"2\",\n\t\t\t\t\"3\"\n\t\t\t]\n\t\t},\n\t\t\"body\": \"test_body\",\n\t\t\"body_variable_count\": 2\n\t},\n\t\"response\": {\n\t\t\"content_type\": \"json\",\n\t\t\"processors\": [\n\t\t\t{\n\t\t\t\t\"id\": \"test_id_0\",\n\t\t\t\t\"name\": \"test_name_0\",\n\t\t\t\t\"selector\": \"test_selector_0\",\n\t\t\t\t\"attr\": \"test_attr_0\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"test_id_1\",\n\t\t\t\t\"name\": \"test_name_1\",\n\t\t\t\t\"selector\": \"test_selector_1\",\n\t\t\t\t\"attr\": \"test_attr_1\"\n\t\t\t}\n\t\t]\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/templates",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询单个",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/templates/test_id_0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"templates",
+								"test_id_0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/templates?p=2&s=10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"templates"
+							],
+							"query": [
+								{
+									"key": "p",
+									"value": "2"
+								},
+								{
+									"key": "s",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新模板",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"is_simple\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/templates/test_id_0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"templates",
+								"test_id_0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/templates/test_id_0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"templates",
+								"test_id_0"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "任务",
+			"item": [
+				{
+					"name": "新建",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"test_id\",\n\t\"template_id\": \"test_template_id\",\n\t\"url_variables\": [\n\t\t\"a\",\n\t\t\"b\"\n\t],\n\t\"body_variables\": [\n\t\t\"a\",\n\t\t\"b\"\n\t],\n\t\"extra_query_params\": {\n\t\t\"a_key\": \"a_val\",\n\t\t\"b_key\": \"b_val\"\n\t},\n\t\"extra_headers\": {\n\t\t\"a_key\": [\"aa\", \"bb\"],\n\t\t\"b_key\": [\"aa\", \"bb\"]\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/jobs",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/jobs",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "上报任务结果",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"status\": true,\n\t\"message\": \"111111111111111111\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/apis/:id/result",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apis",
+								":id",
+								"result"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -12,7 +12,7 @@ func (t *Template) TableName() string {
 
 func (t *Template) Create() error {
 	t.Version = 0
-	return db.Table(t.TableName()).Create(t).Error
+	return db.Create(t).Error
 }
 
 func (t *Template) Read() error {
@@ -20,6 +20,7 @@ func (t *Template) Read() error {
 }
 
 func (t *Template) Update(data map[string]interface{}) error {
+	t.Version += 1
 	err := db.Model(t).Update(data).Error
 	if err != nil {
 		return err

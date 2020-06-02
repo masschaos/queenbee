@@ -21,7 +21,9 @@ func New() *echo.Echo {
 
 	job := e.Group("jobs")
 	{
-		job.GET("", apis.GetJob)
+		job.POST("", apis.CreateJob)
+		job.GET("", apis.ReadJob)
+		job.POST("/:id/result", apis.CreateJobResult)
 	}
 
 	return e
