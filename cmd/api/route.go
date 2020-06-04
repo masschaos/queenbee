@@ -1,4 +1,4 @@
-package route
+package main
 
 import (
 	"github.com/labstack/echo"
@@ -6,7 +6,7 @@ import (
 	"github.com/masschaos/queenbee/apis"
 )
 
-func New() *echo.Echo {
+func router() *echo.Echo {
 	e := echo.New()
 	e.Use(middleware.Recover())
 
