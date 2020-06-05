@@ -4,7 +4,7 @@
 
 QueenBee is the control center of a distributed crawler system.
 
-![](docs/arch.jpg)
+![](.hugo/static/images/arch.jpg)
 
 ## Features
 

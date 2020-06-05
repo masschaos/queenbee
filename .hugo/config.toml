@@ -71,13 +71,13 @@ anchor = "smart"
 
 [languages]
 [languages.en]
-title = "Docsy"
-description = "QueenBee Distributed Crawler"
+title = "QueenBee"
+description = "A Distributed Crawler"
 languageName ="English"
 weight = 1
 [languages.zh]
-title = "Docsy"
-description = "QueenBee 分布式爬虫"
+title = "蜂群爬虫联盟"
+description = "一个互助式的分布式爬虫联盟"
 languageName ="中文"
 weight = 2
 contentDir = "content/zh"
