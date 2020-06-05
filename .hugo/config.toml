@@ -32,8 +32,7 @@ pygmentsStyle = "tango"
 
 # Configure how URLs look like per section.
 [permalinks]
-blog = "/:section/:year/:month/:day/:slug/"
-docs = "/:section/:slug"
+"/" = "/:sections/:slug"
 
 [outputs]
 	home = [ "HTML", "JSON" ]
