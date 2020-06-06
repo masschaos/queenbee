@@ -71,13 +71,13 @@ anchor = "smart"
 
 [languages]
 [languages.en]
-title = "QueenBee"
-description = "A Distributed Crawler"
+title = "BeeFog"
+description = "A Distributed Crawler Community powered by Fog Computing"
 languageName ="English"
 weight = 1
 [languages.zh]
-title = "蜂群爬虫联盟"
-description = "一个互助式的分布式爬虫联盟"
+title = "蜂雾爬虫联盟"
+description = "一个基于雾计算的互助式爬虫联盟"
 languageName ="中文"
 weight = 2
 contentDir = "content/zh"
