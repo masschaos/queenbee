@@ -13,7 +13,7 @@ description: >
 
 BeeFog 的系统模块架构如下图所示，其中方块为模块，连线为模块间调用关系。
 
-![架构图](/images/modules.jpg)
+![架构图](/images/arch.jpg)
 
 ### 工作节点 [ Worker Bees ]
 
