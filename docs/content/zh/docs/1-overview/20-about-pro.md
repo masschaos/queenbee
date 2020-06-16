@@ -1,5 +1,5 @@
 ---
-title: 开源版与专业版对比
+title: 开源版与专业版
 slug: about-pro
 weight: 20
 description: >
