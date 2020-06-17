@@ -8,4 +8,5 @@ require (
 	github.com/jinzhu/gorm v1.9.12
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/echo/v4 v4.1.16 // indirect
+	github.com/masschaos/x v0.0.0-20200617140810-85a658cc2ba8
 )

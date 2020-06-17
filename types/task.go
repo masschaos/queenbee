@@ -3,25 +3,28 @@ package types
 import (
 	"net/http"
 	"time"
+
+	"github.com/masschaos/x/xtype"
 )
 
-// Template is a job description without request parameters.
-type Template struct {
+// WorkerTask defines a task which can run on workers.
+type WorkerTask struct {
 	ID       string       `json:"id" gorm:"type:varchar(20);primary_key"` // use xid for privacy protection
-	Name     string       `json:"name" gorm:"type:varchar(255)`           // user defined name
-	OrgID    string       `json:"org_id" gorm:"type:varchar(255)`         // org id
 	Version  int          `json:"version"`                                // start from 0, +1 after each update
-	IsSimple bool         `json:"is_simple"`                              // simple job can use any http client, otherwise should use a browser.
 	Request  *RequestTpl  `json:"request" gorm:"type:json"`               // store as json
 	Response *ResponseTpl `json:"response" gorm:"type:json"`              // store as json
-	// TODO: Worker side hooks, OnStart OnFinished OnError
-	// TODO: Server side hooks
-	Retries   int       `json:"retries" gorm:"type:int"` // tell worker retry times
-	CreatedAt time.Time // for gorm
-	UpdatedAt time.Time // for gorm
+	Retries  int          `json:"retries" gorm:"type:int"`                // tell worker the max retry times
 }
 
-// RequestTpl is Request Template for job
+// Task struct is the complete definition of task.
+type Task struct {
+	Name      string        `json:"name" gorm:"type:varchar(50)"` // user defined name
+	Scope     xtype.Strings `json:"scope" gorm:"type:json"`       // required scope
+	CreatedAt time.Time     `json:"created_at"`                   // for gorm
+	UpdatedAt time.Time     `json:"updated_at"`                   // for gorm
+}
+
+// RequestTpl is Request Task for job
 type RequestTpl struct {
 	URL       string `json:"url"`                // url template, including fixed query params
 	URLVarCnt int    `json:"url_variable_count"` // for job validation
@@ -33,7 +36,7 @@ type RequestTpl struct {
 	BodyVarCnt int    `json:"body_variable_count"` // for job validation
 }
 
-// ResponseTpl is Response Template for job
+// ResponseTpl is Response Task for job
 type ResponseTpl struct {
 	ContentType string      `json:"content_type"` // html/json/xml
 	Processors  []Processor `json:"processors"`   // all response process rules
