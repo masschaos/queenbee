@@ -1,15 +1,15 @@
 ---
-title: 简介
-slug: intro
-weight: 1
+title: 技术架构
+slug: arch
+weight: 30
 description: >
-  系统简介。
+  更详细的介绍系统的技术实现。
 ---
 
 由于 BeeFog 是面向开发者的计算框架，需要部署后通过 REST API 调用，
 所以推荐在浏览过系统架构和核心概念后，再进快速部署和行试用会有更好的效果。
 
-## 系统架构
+## QueenBee 技术架构
 
 BeeFog 的系统模块架构如下图所示，其中方块为模块，连线为模块间调用关系。
 
