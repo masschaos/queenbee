@@ -1,5 +1,5 @@
 baseURL = "https://queenbee.netlify.app"
-title = "QueenBee Distributed Crawler"
+title = "BEEFOG"
 
 enableRobotsTXT = true
 
@@ -110,12 +110,12 @@ disableLatLong = false
 [languages]
 [languages.en]
 title = "BeeFog"
-description = "A Distributed Crawler Community powered by Fog Computing"
+description = "A Fog Computing Engine"
 languageName ="English"
 weight = 1
 [languages.zh]
-title = "蜂雾爬虫联盟"
-description = "一个基于雾计算的互助式爬虫联盟"
+title = "蜂雾"
+description = "简单易用的雾计算引擎"
 languageName ="中文"
 weight = 2
 contentDir = "content/zh"

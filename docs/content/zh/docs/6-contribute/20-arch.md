@@ -1,7 +1,7 @@
 ---
 title: 技术架构
 slug: arch
-weight: 30
+weight: 20
 description: >
   更详细的介绍系统的技术实现。
 ---
