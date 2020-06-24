@@ -17,7 +17,7 @@ type WorkerJob struct {
 }
 
 // Job struct is the complete definition of job.
-// This is a mysql table: jobs
+// This is a db table: jobs
 type Job struct {
 	WorkerJob
 	Name       string    `json:"name" gorm:"type:varchar(50)"` // user defined name
