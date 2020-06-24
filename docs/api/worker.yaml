@@ -1,0 +1,159 @@
+openapi: "3.0"
+info:
+  title: BeeFog Worker API
+  license:
+    name: MIT
+  version: "0.1"
+  description: |-
+    # Links
+    - [Documentation](https://queenbee.netlify.app)
+    - [Github](https://github.com/masschaos/queenbee)
+
+    # Overview
+
+    ## Authorization
+
+    Work in progress
+
+    ## Status Code
+
+    In normal case, `HTTP Status Code` will be：
+
+    * `200` OK , Most frequently seen, except for the following.
+    * `201` Created , After `POST` API created something.
+    * `202` Accepted , Asynchronous API will always return the 202 .
+    * `204` NoCountent , Request successed but the responese body is empty.
+
+    If an exception is encountered, the possible `HTTP Status Code` will be:
+
+    * `400` Bad `Query Param` or `Request Body` .
+    * `401` Authentication failed. It will be 400 If you do not provide a token.
+    * `403` You're authenticated, but you don't have privileges.
+    * `404` Resource ID not found, empty list will be 200 ok.
+    * `500` Unexpected server-side errors.
+
+    ## Error Handling
+
+    When you encounter an error, you get a status code and the following result:
+    ```json
+    {
+      "error": "InvalidRegion",
+      "message": "Please provide a valid region."
+    }
+    ```
+    `error` is a `TitleCase` string, we will list all possible errors in API doc.
+    You can use this string to control the worker's behavior.
+    `message` is friendly to understanding.
+
+    ## Rate Limit
+
+    Work in progress
+
+
+tags:
+  - name: Register
+    description: Register with the QueenBee.
+  - name: Job
+    description: Get job and report the job result.
+
+paths:
+  /worker/login:
+    post:
+      tags:
+        - Register
+      summary: Login to QueenBee
+      description: |-
+        Exchanging `Worker Token` with a `Worker Group Code`
+      operationId: worker-login
+      parameters:
+        - name: wgcode
+          in: query
+          description: Worker Group Code is a 22-charactor string.
+          required: true
+          schema:
+            type: string
+          example: wgbrge41f4sndoegn94mk0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/token"
+        "400":
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /worker/job:
+    get:
+      tags:
+        - Job
+      summary: request a job from QueenBee
+      description: if there is no job, return 204 no content
+      operationId: worker-job
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/run"
+        "204":
+          description: NoContent
+
+# models
+components:
+  schemas:
+    error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: TitleCase string, error type.
+          required: true
+          example: InvalidQueryParam
+        message:
+          type: string
+          description: error message.
+          required: true
+          example: please provide correct query parameters.
+    token:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Auth token, 20-charactor string.
+          required: true
+          example: dbc7a5e0426985f7148a
+        expiredAt:
+          description: RFC 3339
+          example: "2017-12-08T00:00:00.00Z"
+          type: string
+    job:
+      type: object
+      description: A job
+      properties:
+        id:
+          type: string
+          description: ID is a 20-charactor string.
+          required: true
+          example: dbc7a5e0426985f7148b
+        version:
+          type: integer
+          format: int32
+          description: job version, start from 0, +1 after every change
+          required: true
+          example: 0
+    run:
+      type: object
+      description: A job run
+      properties:
+        id:
+          type: string
+          description: ID is a 20-charactor string.
+          required: true
+          example: dbc7a5e0426985f7148c
