@@ -13,7 +13,7 @@ type WorkerRun struct {
 	Job        *WorkerJob      `json:"job"`                      // if worker need
 	JobVersion int             `json:"jobVersion"`               // for worker side cache
 	Params     xtype.StringMap `json:"params" gorm:"type:json"`  // all params
-	Context    xtype.StringMap `json:"context" gorm:"type:json"` // extra data for worker side hooks
+	Context    xtype.StringMap `json:"context" gorm:"type:json"` // context data in pipeline
 }
 
 // RunResult is the body worker reported to queen.

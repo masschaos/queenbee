@@ -87,7 +87,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/error"
   /worker/job:
     get:
       tags:
@@ -95,6 +95,29 @@ paths:
       summary: request a job from QueenBee
       description: if there is no job, return 204 no content
       operationId: worker-job
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/run"
+        "204":
+          description: NoContent
+  /worker/runs/{id}/result:
+    put:
+      tags:
+        - Job
+      summary: report a job run result to QueenBee
+      description: QueenBee will respond with a new job,if there is no new job, return 204 no content
+      operationId: worker-job-result
+      parameters:
+        - name: id
+          in: path
+          description: run id
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -148,6 +171,48 @@ components:
           description: job version, start from 0, +1 after every change
           required: true
           example: 0
+        timeLimit:
+          type: integer
+          format: int32
+          description: job run time limit in worker (seconds)
+          required: true
+          example: 180
+        steps:
+          type: array
+          description: all steps will run in worker
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: user defined id
+                required: true
+                example: step1
+              name:
+                type: string
+                description: user defined name
+                example: Visit homepage
+              if:
+                type: string
+                description: if conditional to prevent a step from running unless a condition is met.
+                example: "{{ success() }}"
+              retryLimit:
+                type: integer
+                format: int32
+                description: step retry times limit in worker
+                example: 1
+              timeLimit:
+                type: integer
+                format: int32
+                description: step run time limit in worker (seconds)
+                example: 60
+              type:
+                type: string
+                description: step type
+                example: chrome-visit
+              content:
+                type: object
+                description: content structrue depends on step type
     run:
       type: object
       description: A job run
@@ -157,6 +222,13 @@ components:
           description: ID is a 20-charactor string.
           required: true
           example: dbc7a5e0426985f7148c
+        jobID:
+          type: string
+          description: jobID is a 20-charactor string.
+          required: true
+          example: dbc7a5e0426985f7148b
+        job:
+          $ref: "#/components/schemas/job"
     result:
       type: object
       description: A job run result

@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "redoc-cli bundle api/worker.yaml && mv redoc-static.html static/api/worker/index.html"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^9.8.0",
-    "postcss-cli": "^7.1.1"
+    "postcss-cli": "^7.1.1",
+    "redoc-cli": "^0.9.8"
   }
 }

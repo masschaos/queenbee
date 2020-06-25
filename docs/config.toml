@@ -96,6 +96,10 @@ disableLatLong = false
 #    weight = 40
 #    url = "https://example.docsy.dev"
 [[menu.main]]
+    name = "Worker API"
+    weight = 40
+    url = "/api/worker"
+[[menu.main]]
     name = "GitHub"
     weight = 50
     url = "https://github.com/masschaos/queenbee/"
