@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "redoc-cli bundle api/worker.yaml && mv redoc-static.html static/api/worker/index.html"
+    "build": "npm run build:worker && npm run build:user",
+    "build:worker": "redoc-cli bundle api/worker.yaml && npm run cp:en && npm run cp:zh",
+    "build:user": "redoc-cli bundle api/user.yaml && npm run cp:en && npm run cp:zh",
+    "cp:en": "cp redoc-static.html content/en/api/worker/index.html",
+    "cp:zh": "cp redoc-static.html content/zh/api/worker/index.html"
   },
   "author": "",
   "license": "ISC",

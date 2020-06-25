@@ -33,6 +33,8 @@ github.com/masschaos/x v0.0.0-20200619040854-b462b0011d40 h1:EX3KTKlnZKJeBsBiRYZ
 github.com/masschaos/x v0.0.0-20200619040854-b462b0011d40/go.mod h1:UQrPG3iPQP+ZlveJrTIlu12CJdhOGxixDi70SWBtEhs=
 github.com/masschaos/x v0.0.0-20200624154759-21e2c3dc1db1 h1:ql3mFO6YnNhksbYxrN0bRJbYkOSnak7wd7YkWVWLb1c=
 github.com/masschaos/x v0.0.0-20200624154759-21e2c3dc1db1/go.mod h1:jg705ctdLcngHdN2SJRduIQDrXtTF2jeQ3QaNEhhVHA=
+github.com/masschaos/x v0.0.0-20200625034922-8c11e3d25fc3 h1:FI3LLbAv/fL2tc41I9nX244iB2FlphlDLufnp1W9CU8=
+github.com/masschaos/x v0.0.0-20200625034922-8c11e3d25fc3/go.mod h1:jg705ctdLcngHdN2SJRduIQDrXtTF2jeQ3QaNEhhVHA=
 github.com/mattn/go-colorable v0.1.2/go.mod h1:U0ppj6V5qS13XJ6of8GYAs25YV2eR4EVcfRqFIhoBtE=
 github.com/mattn/go-colorable v0.1.6 h1:6Su7aK7lXmJ/U79bYtBjLNaha4Fs1Rg9plHpcH+vvnE=
 github.com/mattn/go-colorable v0.1.6/go.mod h1:u6P/XSegPjTcexA+o6vUJrdnUu04hMope9wVRipJSqc=

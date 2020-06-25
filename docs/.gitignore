@@ -5,5 +5,7 @@ node_modules/
 
 redoc-static.html
 
-static/api/worker/index.html
-static/api/user/index.html
+content/zh/api/worker/index.html
+content/zh/api/user/index.html
+content/en/api/worker/index.html
+content/en/api/user/index.html

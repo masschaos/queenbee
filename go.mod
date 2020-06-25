@@ -8,7 +8,7 @@ require (
 	github.com/jinzhu/gorm v1.9.12
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/echo/v4 v4.1.16 // indirect
-	github.com/masschaos/x v0.0.0-20200624154759-21e2c3dc1db1
+	github.com/masschaos/x v0.0.0-20200625034922-8c11e3d25fc3
 	github.com/valyala/fasttemplate v1.1.1 // indirect
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
 	golang.org/x/net v0.0.0-20200625001655-4c5254603344 // indirect
