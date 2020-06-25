@@ -157,3 +157,12 @@ components:
           description: ID is a 20-charactor string.
           required: true
           example: dbc7a5e0426985f7148c
+    result:
+      type: object
+      description: A job run result
+      properties:
+        id:
+          type: string
+          description: ID is a 20-charactor string.
+          required: true
+          example: dbc7a5e0426985f7148c

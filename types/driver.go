@@ -25,7 +25,7 @@ func (t *RequestTpl) Scan(src interface{}) error {
 func (t RequestTpl) Value() (driver.Value, error) {
 	tmp, err := json.Marshal(t)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	return string(tmp), nil
 }
@@ -49,7 +49,7 @@ func (t *ResponseTpl) Scan(src interface{}) error {
 func (t ResponseTpl) Value() (driver.Value, error) {
 	tmp, err := json.Marshal(t)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	return string(tmp), nil
 }

@@ -20,11 +20,12 @@ type WorkerJob struct {
 // This is a db table: jobs
 type Job struct {
 	WorkerJob
-	Name       string    `json:"name" gorm:"type:varchar(50)"` // user defined name
-	Scope      xtype.Set `json:"scope" gorm:"type:json"`       // required scope, union of the step scopes
-	QueenSteps Steps     `json:"queenSteps" gorm:"type:json"`  // job steps runs on queen
-	CreatedAt  time.Time `json:"createdAt"`                    // for gorm
-	UpdatedAt  time.Time `json:"updatedAt"`                    // for gorm
+	Name         string    `json:"name" gorm:"type:varchar(50)"`  // user defined name
+	Scope        xtype.Set `json:"scope" gorm:"type:json"`        // required scope, union of the step scopes
+	NetworkLimit *Network  `json:"networkLimit" gorm:"type:json"` // network limit in run will overwrite it in job define
+	QueenSteps   Steps     `json:"queenSteps" gorm:"type:json"`   // job steps runs on queen
+	CreatedAt    time.Time `json:"createdAt"`                     // for gorm
+	UpdatedAt    time.Time `json:"updatedAt"`                     // for gorm
 }
 
 // Steps is a step array, defined for custom db driver
