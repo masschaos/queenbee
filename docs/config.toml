@@ -98,7 +98,7 @@ disableLatLong = false
 [[menu.main]]
     name = "Worker API"
     weight = 40
-    url = "/api/worker"
+    url = "https://queenbee.netlify.app/api/worker"
 [[menu.main]]
     name = "GitHub"
     weight = 50
