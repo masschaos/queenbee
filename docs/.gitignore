@@ -3,9 +3,5 @@ public/
 resources/
 node_modules/
 
-redoc-static.html
-
-content/zh/api/worker/index.html
-content/zh/api/user/index.html
-content/en/api/worker/index.html
-content/en/api/user/index.html
+# ci will cp docs/api to docs/static/api
+static/api
