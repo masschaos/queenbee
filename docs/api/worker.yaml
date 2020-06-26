@@ -63,9 +63,9 @@ paths:
     post:
       tags:
         - Register
-      summary: Login to QueenBee
+      summary: Login
       description: |-
-        Exchanging `Worker Token` with a `Worker Group Code`
+        Login to QueenBee, exchanging `Worker Token` with a `Worker Group Code`.
       operationId: worker-login
       requestBody:
         content:
@@ -97,8 +97,8 @@ paths:
     get:
       tags:
         - Job
-      summary: request a job from QueenBee
-      description: if there is no job, return 204 no content
+      summary: Request a job
+      description: Request a job from QueenBee, if there is no job, will return 204 no content.
       operationId: worker-job
       responses:
         "200":
@@ -113,8 +113,11 @@ paths:
     put:
       tags:
         - Job
-      summary: report a job run result to QueenBee
-      description: QueenBee will respond with a new job,if there is no new job, return 204 no content
+      summary: Report Job Result
+      description: |-
+        After result received,
+        queenBee will respond to you with a new job,
+        if there is no new job, return 204 no content.
       operationId: worker-job-result
       parameters:
         - name: id

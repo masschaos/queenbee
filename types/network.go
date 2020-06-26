@@ -4,6 +4,7 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"time"
 )
 
@@ -13,6 +14,11 @@ type Network struct {
 	State  string `json:"state" gorm:"type:varchar(50)"`  // state or province
 	City   string `json:"city" gorm:"type:varchar(50)"`   // city
 	ISP    string `json:"isp" gorm:"type:varchar(50)"`    // ISP
+}
+
+// String log for network
+func (n Network) String() string {
+	return fmt.Sprintf("%s %s %s %s", n.Region, n.State, n.City, n.ISP)
 }
 
 // IPv4Network is a db table: ip_v4_networks

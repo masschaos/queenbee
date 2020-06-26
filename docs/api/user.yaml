@@ -53,20 +53,111 @@ info:
 
 
 tags:
-  - name: Register
-    description: Register with the QueenBee.
   - name: Job
-    description: Get job and report the job result.
+    description: Manage job definition.
+  - name: Run
+    description: Run a job and query the result.
+  - name: Worker
+    description: Worker status summary.
 
 paths:
-  /worker/login:
+  /workerbee/status:
+    get:
+      tags:
+        - Worker
+      summary: Status Summary
+      description: |-
+        Count of workers group by geo state,isp.
+      operationId: worker-status
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/workerStatus"
+        "500":
+          description: ServerError
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
+  /jobs/{id}:
+    get:
+      tags:
+        - Job
+      summary: Get a Job
+      description: Get job by id.
+      operationId: job-get-one
+      parameters:
+        - name: id
+          in: path
+          description: job id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/job"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error404"
+        "500":
+          description: ServerError
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
+  /jobs:
+    get:
+      tags:
+        - Job
+      summary: Get Jobs
+      description: Get job list
+      operationId: job-get-list
+      # TODO: more query params
+      parameters:
+        - name: page
+          in: query
+          description: Page number, page size is 20 always.
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: order
+          in: query
+          description: Order by created/run time, desc always.
+          schema:
+            type: string
+            default: created
+            example: run
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/run"
+        "204":
+          description: NoContent
     post:
       tags:
-        - Register
-      summary: Login to QueenBee
+        - Worker
+      summary: WorkerBees status
       description: |-
-        Exchanging `Worker Token` with a `Worker Group Code`
-      operationId: worker-login
+        Count of workers group by geo state,isp.
+      operationId: worker-status
       requestBody:
         content:
           "application/json":
@@ -93,22 +184,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
-  /worker/job:
-    get:
-      tags:
-        - Job
-      summary: request a job from QueenBee
-      description: if there is no job, return 204 no content
-      operationId: worker-job
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/run"
-        "204":
-          description: NoContent
   /worker/runs/{id}/result:
     put:
       tags:
@@ -149,6 +224,32 @@ components:
           description: error message.
           required: true
           example: please provide correct query parameters.
+    error404:
+      type: object
+      properties:
+        error:
+          type: string
+          description: TitleCase string, error type.
+          required: true
+          example: NotFound
+        message:
+          type: string
+          description: error message.
+          required: true
+          example: Record not found.
+    error500:
+      type: object
+      properties:
+        error:
+          type: string
+          description: TitleCase string, error type.
+          required: true
+          example: ServerError
+        message:
+          type: string
+          description: error message.
+          required: true
+          example: Please contact your system administrator or submit an github issue report.
     token:
       type: object
       properties:
