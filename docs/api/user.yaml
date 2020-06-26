@@ -120,7 +120,7 @@ paths:
     put:
       tags:
         - Job
-      summary: Update Job
+      summary: Update a Job
       description: |-
         Update a job definition, no steps included.
         You can change steps later.
@@ -150,6 +150,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error404"
+        "500":
+          description: ServerError
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
+    delete:
+      tags:
+        - Job
+      summary: Delete a Job
+      description: |-
+        Delete a job definition, with everything connecting to it, such as triggers, runs, results etc.
+      operationId: job-delete
+      parameters:
+        - name: id
+          in: path
+          description: job id
+          required: true
+          schema:
+            type: string
+        "204":
+          description: NoContent
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error404"
         "500":
           description: ServerError
           content:
@@ -203,7 +237,7 @@ paths:
     post:
       tags:
         - Job
-      summary: Create Job
+      summary: Create a Job
       description: |-
         Create a job definition, no steps included.
         You can init or change steps later.
@@ -232,18 +266,25 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error500"
-  /worker/runs/{id}/result:
-    put:
+  /runs:
+    get:
       tags:
-        - Job
-      summary: report a job run result to QueenBee
-      description: QueenBee will respond with a new job,if there is no new job, return 204 no content
-      operationId: worker-job-result
+        - Run
+      summary: Get Runs
+      description: Get Job Run list
+      operationId: run-get-list
+      # TODO: more query params
       parameters:
-        - name: id
-          in: path
-          description: run id
-          required: true
+        - name: page
+          in: query
+          description: Page number, page size is 20 always.
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: jobID
+          in: query
+          description: Query runs for a job.
           schema:
             type: string
       responses:
@@ -252,9 +293,52 @@ paths:
           content:
             application/json:
               schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/run"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+        "500":
+          description: ServerError
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
+    post:
+      tags:
+        - Run
+      summary: Invoke a Job
+      description: |-
+        Invoke a job, with the specified parameters and conditions.
+      operationId: job-create
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/runInvoke"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
                 $ref: "#/components/schemas/run"
-        "204":
-          description: NoContent
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+        "500":
+          description: ServerError
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
 
 # models
 components:
