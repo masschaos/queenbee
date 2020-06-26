@@ -117,6 +117,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error500"
+    put:
+      tags:
+        - Job
+      summary: Update Job
+      description: |-
+        Update a job definition, no steps included.
+        You can change steps later.
+      operationId: job-update
+      parameters:
+        - name: id
+          in: path
+          description: job id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/jobUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/job"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+        "500":
+          description: ServerError
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
   /jobs:
     get:
       tags:
@@ -149,41 +188,50 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/run"
-        "204":
-          description: NoContent
-    post:
-      tags:
-        - Worker
-      summary: WorkerBees status
-      description: |-
-        Count of workers group by geo state,isp.
-      operationId: worker-status
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: object
-              properties:
-                code:
-                  type: string
-                  description: Worker Group Code is a 22-charactor string.
-                  required: true
-                  example: wgbrge41f4sndoegn94mk0
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/token"
         "400":
-          description: Bad Request Error
+          description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
+        "500":
+          description: ServerError
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
+    post:
+      tags:
+        - Job
+      summary: Create Job
+      description: |-
+        Create a job definition, no steps included.
+        You can init or change steps later.
+      operationId: job-create
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/jobCreate"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/job"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+        "500":
+          description: ServerError
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
   /worker/runs/{id}/result:
     put:
       tags:
@@ -262,9 +310,42 @@ components:
           description: RFC 3339
           example: "2017-12-08T00:00:00.00Z"
           type: string
-    job:
+    # TODO: WIP
+    jobCreate:
       type: object
       description: A job
+      properties:
+        name:
+          type: string
+          description: User defined job name.
+          required: true
+          example: "Hacker News crawler"
+        timeLimit:
+          type: integer
+          format: int32
+          description: job run time limit in worker (seconds)
+          required: true
+          default: 60
+          example: 180
+    jobUpdate:
+      type: object
+      description: A job
+      properties:
+        name:
+          type: string
+          description: User defined job name.
+          required: true
+          example: "Hacker News crawler"
+        timeLimit:
+          type: integer
+          format: int32
+          description: job run time limit in worker (seconds)
+          required: true
+          default: 60
+          example: 180
+    job:
+      type: object
+      description: A job definition
       properties:
         id:
           type: string
@@ -319,6 +400,16 @@ components:
               content:
                 type: object
                 description: content structrue depends on step type
+    # TODO: WIP
+    runInvoke:
+      type: object
+      description: Data required for invoking a job.
+      properties:
+        jobID:
+          type: string
+          description: jobID is a 20-charactor string.
+          required: true
+          example: dbc7a5e0426985f7148b
     run:
       type: object
       description: A job run
@@ -333,14 +424,13 @@ components:
           description: jobID is a 20-charactor string.
           required: true
           example: dbc7a5e0426985f7148b
-        job:
-          $ref: "#/components/schemas/job"
-    result:
+    workerStatus:
       type: object
-      description: A job run result
+      description: Worker status summary
       properties:
-        id:
-          type: string
-          description: ID is a 20-charactor string.
+        online:
+          type: integer
+          format: int32
+          description: Total online workers.
           required: true
-          example: dbc7a5e0426985f7148c
+          example: 2046

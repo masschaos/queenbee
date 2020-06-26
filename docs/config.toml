@@ -91,10 +91,10 @@ disableLatLong = false
 
 # Additional menu items
 
-#[[menu.main]]
-#    name = "Example Site"
-#    weight = 40
-#    url = "https://example.docsy.dev"
+[[menu.main]]
+    name = "User API"
+    weight = 30
+    url = "/api/user"
 [[menu.main]]
     name = "Worker API"
     weight = 40
@@ -118,7 +118,7 @@ description = "A Fog Computing Engine"
 languageName ="English"
 weight = 1
 [languages.zh]
-title = "蜂雾"
+title = "BeeFog"
 description = "简单易用的雾计算引擎"
 languageName ="中文"
 weight = 2
