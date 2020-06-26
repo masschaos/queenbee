@@ -1,9 +1,6 @@
 ---
 title: QueenBee 是什么
 linkTitle: 特性概览
-menu:
-  main:
-    weight: 10
 layout: docs
 ---
 
