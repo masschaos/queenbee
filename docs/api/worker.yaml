@@ -84,9 +84,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/token"
+                $ref: "#/components/schemas/token"
         "400":
           description: Bad Request Error
           content:

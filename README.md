@@ -6,6 +6,10 @@ QueenBee is the control center of a distributed crawler system.
 
 ![](docs/static/images/beefog.jpg)
 
+## Documentation
+
+[https://queenbee.netlify.app](https://queenbee.netlify.app)
+
 ## Features
 
-- WIP
+Work in progress
